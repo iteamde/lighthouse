@@ -1,0 +1,188 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+
+/* For use in src/lib/core/theming/_palette.scss */
+$lighthouse-blue: (
+    50 : #e7f2fc,
+    100 : #c4def8,
+    200 : #9dc8f3,
+    300 : #75b1ee,
+    400 : #58a1eb,
+    500 : #3a90e7,
+    600 : #3488e4,
+    700 : #2c7de0,
+    800 : #2573dd,
+    900 : #1861d7,
+    A100 : #ffffff,
+    A200 : #d6e4ff,
+    A400 : #a3c3ff,
+    A700 : #8ab2ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$lighthouse-yellow: (
+    50 : #fff9ef,
+    100 : #fff0d7,
+    200 : #ffe6bc,
+    300 : #ffdca1,
+    400 : #ffd58d,
+    500 : #ffcd79,
+    600 : #ffc871,
+    700 : #ffc166,
+    800 : #ffba5c,
+    900 : #ffae49,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fff8f0,
+    A700 : #ffecd6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$lighthouse-red: (
+    50 : #ffedeb,
+    100 : #ffd1cd,
+    200 : #ffb2ac,
+    300 : #ff938b,
+    400 : #ff7c72,
+    500 : #ff6559,
+    600 : #ff5d51,
+    700 : #ff5348,
+    800 : #ff493e,
+    900 : #ff372e,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffdbda,
+    A700 : #ffc3c0,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$lighthouse-orange: (
+    50 : #fcf1e0,
+    100 : #f8dbb3,
+    200 : #f3c380,
+    300 : #eeab4d,
+    400 : #eb9926,
+    500 : #e78700,
+    600 : #e47f00,
+    700 : #e07400,
+    800 : #dd6a00,
+    900 : #d75700,
+    A100 : #fffefe,
+    A200 : #ffddcb,
+    A400 : #ffbb98,
+    A700 : #ffaa7f,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$lh-white: (
+    50 : #ffffff,
+    100 : #ffffff,
+    200 : #ffffff,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// mandatory stuff for theming
+$lh-palette-primary: mat-palette($lighthouse-blue);
+$lh-palette-accent:  mat-palette($lighthouse-yellow);
+$lh-palette-warn: mat-palette($lighthouse-orange);
+
+// include the custom theme components into a theme object
+$lh-theme: mat-light-theme($lh-palette-primary, $lh-palette-accent, $lh-palette-warn);
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat-color($lh-palette-primary);
+$accent: mat-color($lh-palette-accent);
+$warn: mat-color($lh-palette-warn);
+
+
+// include the custom theme object into the angular material theme
+@include angular-material-theme($lh-theme);

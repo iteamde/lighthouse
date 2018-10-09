@@ -1,0 +1,24 @@
+<div class="nav-close hand-cursor">
+<mat-icon (click)="toggleMenu()">close</mat-icon>
+</div>
+<a routerLink=""></a>
+<div class="side-menu" [@listStagger]="menu$.length" *ngIf="secondaryMenuTitle == 'home'">
+  <!-- <h5>Home</h5> -->
+  <h2>Our Gear</h2>
+  <ul *ngFor="let item of menu$"  (click)="secondaryMenu(item)">{{ item.name }}</ul>
+  <!-- <a tabindex=-1 routerLink="catalogue/all">View all</a> -->
+</div>
+
+<div class="side-menu secondary" [@listStagger]="7" *ngIf="secondaryMenuTitle != 'home'">
+    <h2><mat-icon class="back hand-cursor" (click)="secondaryMenu('home')">arrow_back</mat-icon>{{ secondaryMenuTitle }}</h2>
+    <ul *ngFor="let item of menu$[secondaryMenuOrder].sub" (click)="toggleMenu()" routerLink="catalogue/{{ secondaryMenuLink }}/{{ item.link }}">{{ item.name }}</ul>
+    <!-- <a tabindex=-1 routerLink="catalogue/{{ secondaryMenuTitle }}">View all</a> -->
+</div>
+
+<div class="side-footer">
+  <ul><a routerLink="about" (click)="toggleMenu()">About</a></ul>
+  <ul><a routerLink="sponsorship" (click)="toggleMenu()">Sponsorships</a></ul>
+  <ul><a routerLink="contact" (click)="toggleMenu()">Contact</a></ul>
+  <ul><a routerLink="privacy" (click)="toggleMenu()">Privacy</a></ul>
+  <!-- <ul>Services</ul> -->
+</div>

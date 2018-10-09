@@ -1,0 +1,105 @@
+/**
+  * @stylesheet styles.scss Lighthouse Stylesheet
+  * 
+
+
+██╗     ██╗ ██████╗ ██╗  ██╗████████╗██╗  ██╗ ██████╗ ██╗   ██╗███████╗███████╗
+██║     ██║██╔════╝ ██║  ██║╚══██╔══╝██║  ██║██╔═══██╗██║   ██║██╔════╝██╔════╝
+██║     ██║██║  ███╗███████║   ██║   ███████║██║   ██║██║   ██║███████╗█████╗  
+██║     ██║██║   ██║██╔══██║   ██║   ██╔══██║██║   ██║██║   ██║╚════██║██╔══╝  
+███████╗██║╚██████╔╝██║  ██║   ██║   ██║  ██║╚██████╔╝╚██████╔╝███████║███████╗
+╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+                                                                               
+
+  *
+  * @description
+  * Global style definitions and imports for Lighthouse
+  */
+
+@import "lighthouse";
+@import "styles/variables";
+@import "styles/breakpoints";
+
+@import "styles/quote";
+@import "styles/inspirations";
+@import "styles/gradients";
+
+@import "styles/catalogue";
+@import "styles/projects";
+@import "styles/booking";
+@import "styles/account";
+@import "styles/cursors";
+@import "styles/pages";
+@import "styles/global";
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700|Work+Sans:400,500,700");
+
+.intercom-launcher-frame {
+  margin-right: 10px !important;
+}
+
+.xxl {
+  display: none;
+}
+
+.lh-menu {
+  color: $primary;
+  // border: 1px solid $border-grey;
+  font-size: 1em !important;
+  font-weight: 600;
+  margin-top: 9px;
+  max-width: 250px;
+  z-index: 9999;
+  min-width: 160px;
+  margin-left: -15px;
+  position: absolute;
+  background: white;
+  font-family: "Poppins";
+  ul {
+    padding: 10px !important;
+    color: $grey !important;
+    font-size: 1em !important;
+  }
+  li {
+    display: block;
+    padding: 12px;
+  }
+  li:hover {
+    background: $light-blue;
+    color: $primary;
+  }
+}
+
+.grey {
+  color: $grey;
+}
+
+.blue {
+  color: $primary !important;
+}
+
+
+.scroll-debug {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  font-size: 5em;
+  background: blue;
+  color: white;
+  z-index: 999999999999999;
+}
+
+.inner {
+  height: 300px;
+  overflow: scroll;
+}
+
+.menu-open {
+  display: block !important;
+  position: fixed;
+  overflow: auto;
+  z-index: 999999999;
+  background: white;
+  height: 100%;
+  box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+}

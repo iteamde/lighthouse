@@ -1,0 +1,179 @@
+<section class="booking reg-padding">
+
+    <mat-horizontal-stepper class="top-margin" linear #stepper>
+
+        <!-- LOGIN DETAILS -->
+        <mat-step [stepControl]="loginDetailsGroup" editable="false" *ngIf="!fragment">
+
+            <div *ngIf="!loading">
+                <div class="illustration-body">
+                    <div class="illustration-row desktop-only">
+                        <img class="illustration-image" src="assets/illustrations/isthisyou_1.png">
+                    </div>
+                    <div class="illustration-row">
+                        <h1 class="top-title">Register</h1>
+                        <p>Creating an account allows you to create and manage projects, view your previous jobs and
+                            receive your loyalty discount.</p>
+                        <form #f="ngForm" [formGroup]="loginDetailsGroup" class="sign-up-form">
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input formControlName="email" type="email" name="email" matInput (change)="checkIfEmailExists(loginDetailsGroup.value.email)"
+                                    placeholder="EMAIL">
+                            </mat-form-field>
+                            <mat-error *ngIf="emailProviders?.length >= 1">Looks like you already have an account. <a
+                                    routerLink="/login">Login</a></mat-error>
+
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input type="text" formControlName="phone" name="phone" matInput placeholder="PHONE NUMBER">
+                            </mat-form-field>
+
+                            <div *ngIf="!disabled" [formGroup]="passwordFormGroup">
+                                <mat-form-field floatLabel="always" class="user-input">
+                                    <input formControlName="password" type="password" name="password" minlength="6"
+                                        matInput placeholder="PASSWORD">
+                                </mat-form-field>
+                                <mat-error *ngIf="passwordFormGroup.controls.password.errors?.required && passwordFormGroup.controls.password.touched">Password
+                                    is required</mat-error>
+                                <mat-error *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must
+                                    be at least 6 characters</mat-error>
+
+                                <mat-form-field floatLabel="always" class="user-input">
+                                    <input formControlName="confirmPassword" type="password" name="confirmPassword"
+                                        minlength="6" matInput placeholder="CONFIRM PASSWORD">
+                                </mat-form-field>
+
+                                <mat-error *ngIf="passwordFormGroup.controls.confirmPassword.errors?.required && passwordFormGroup.controls.confirmPassword.touched">Confirm
+                                    password is required</mat-error>
+                                <mat-error *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</mat-error>
+                            </div>
+
+                            <button mat-raised-button [disabled]="!loginDetailsGroup.valid" class="btn-full" color="primary"
+                                type="submit" (click)="checkIfUserExists(loginDetailsGroup.value.email, loginDetailsGroup.value.phone, stepper)">
+                                Next</button>
+                        </form>
+
+                        <div class='hr-sect'>or</div>
+
+                        <button mat-raised-button class="btn-full social-login-btn" (click)="googleSignUp(stepper)">
+                            <img src="./assets/google.png" alt="Google Logo">Connect with Google
+                        </button>
+
+                        <!-- <button  mat-raised-button  class="btn-full social-login-btn" (click)="this.auth.facebookLogin()">
+                <img src="./assets/facebook.png" alt="Facebook Logo">Connect with Facebook
+             </button> -->
+
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+
+        <!-- ACCOUNT EXISTS CHECK -->
+        <mat-step class="sign-up-form" editable="false" *ngIf="userService.isThisYouData">
+            <div class="illustration-body">
+                <div class="illustration-row desktop-only">
+                    <img class="illustration-image" src="assets/illustrations/isthisyou.png">
+                </div>
+                <div class="illustration-row">
+                    <app-isthisyou [step]="stepper" [form]="signUp"></app-isthisyou>
+                </div>
+            </div>
+        </mat-step>
+
+        <!-- PERSONAL DETAILS -->
+
+        <mat-step editable="false" [stepControl]="personalDetailsGroup">
+
+            <div *ngIf="!loading">
+                <div class="illustration-body">
+                    <div class="illustration-row desktop-only">
+                        <img class="illustration-image" src="assets/illustrations/gear_1.png">
+                    </div>
+                    <div class="illustration-row">
+                        <h1 class="top-title">Your details</h1>
+                        <form [formGroup]="userService.signUpDetails" class="sign-up-form">
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input type="text" formControlName="firstName" matInput placeholder="FIRST NAME">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input type="text" formControlName="lastName" matInput placeholder="LAST NAME">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input type="text" formControlName="phoneNumber" matInput placeholder="PHONE NUMBER">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always" class="user-input">
+                                <input formControlName="address" ngx-google-places-autocomplete matInput [options]='addressService.placesOptions'
+                                    #places="ngx-places" placeholder="ADDRESS" (onAddressChange)="personalAddressChange($event)" />
+                            </mat-form-field>
+
+                            <div class="extra-signup-details">
+                                <mat-checkbox color="primary" formControlName="companyIs">I work for a production
+                                    company</mat-checkbox>
+
+                                <div class="extra-details-fields" *ngIf="userService.signUpDetails.value.companyIs">
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="companyPosition" matInput placeholder="YOUR POSITION">
+                                    </mat-form-field>
+
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="companyName" matInput placeholder="COMPANY NAME">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="companyPhoneNumber" matInput placeholder="PHONE NUMBER">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input formControlName="companyAddress" ngx-google-places-autocomplete matInput
+                                            [options]='addressService.placesOptions' #places="ngx-places" placeholder="ADDRESS"
+                                            (onAddressChange)="companyAddressChange($event)" />
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="extra-signup-details">
+                                <mat-checkbox color="primary" formControlName="studentIs">I am a student</mat-checkbox>
+
+                                <div class="extra-details-fields" *ngIf="userService.signUpDetails.value.studentIs">
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="studentIdNumber" matInput placeholder="ID NUMBER">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="studentSchoolName" matInput placeholder="SCHOOL NAME">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="studentCourseName" matInput placeholder="COURSE NAME">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always" class="user-input">
+                                        <input type="text" formControlName="studentGraduationYear" matInput placeholder="GRADUATION YEAR">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <button mat-raised-button [disabled]="!userService.signUpDetails.valid" class="btn-full small-top-margin"
+                            color="primary" (click)="signUp(stepper)">
+                            Register</button>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+
+        <!-- CREATE NEW USER AND CONFIRMATION -->
+
+        <mat-step editable="false">
+            <h1 style="margin-bottom: 0.5em">That's it!</h1>
+            <h1 style="margin-top: 0.5em">Welcome aboard.</h1>
+            <p>We're so excited to have you as part of the Lighthouse Rentals family. We've something something info
+            </p>
+        </mat-step>
+    </mat-horizontal-stepper>
+    <colour-spinner *ngIf="loading" class="center"></colour-spinner>
+</section>

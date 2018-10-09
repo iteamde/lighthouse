@@ -1,0 +1,42 @@
+<colour-spinner *ngIf="loading" class="center"></colour-spinner>
+
+<section  *ngIf="!loading" class="isthisyou">
+
+        <h1 class="top-title">Is this you?</h1>
+        <p>We've found your details in our database and see you're an exisiting customer with us.</p>
+        <mat-card (click)="thisIsMe(user.rid)" *ngFor="let user of userService.isThisYouData">
+          <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+          <h5>{{ user.phone }}</h5>
+          <h5>{{ user.email }}</h5>
+          <div class="logos">
+            <div class="single-logo"> 
+              <img src="./assets/savage.png" alt="Savage Logo">
+            </div> 
+            <div class="single-logo"> 
+            <img src="./assets/logo.png" alt="Lighthouse Logo">
+          </div> 
+            <div class="single-logo"> 
+            <img src="./assets/aspv.png" alt="All Set Production Vehicles Logo">
+          </div> 
+        </div>
+        </mat-card>
+
+        <p>Link your account to recieve your loyalty discount rate off gear rentals.</p>
+
+        <div>
+            <button
+            *ngFor="let user of userService.isThisYouData"
+            (click)="thisIsMe(user.rid)"
+            mat-raised-button 
+            color="primary" 
+            class="btn-full">Yes, link my account ></button>
+        
+            <button
+            mat-stroked-button 
+            color="primary" 
+            class="btn-full"
+            (click)="thatsNotMe()">That's not me</button>
+        </div>
+
+      </section>
+

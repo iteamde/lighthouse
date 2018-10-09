@@ -1,0 +1,175 @@
+/**
+  * @stylesheet account.scss Account Stylesheet
+  *
+  * @description
+  * Accounts and Users stylesheets
+  */
+
+  @import 'variables';
+  
+.acc-padding {
+    margin-top: 140px;
+    position: relative;
+    padding: 0 25px;
+    @include lg {
+        margin-top: -50px;
+        padding: 2em 8em;
+    }
+}
+
+.member-level {
+    padding: 75px 25px 55px 25px;
+    box-sizing: border-box;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    h3 {
+        color: white;
+    }
+    @include lg {
+        position: relative;
+        padding: 3em 8em 5em 8em;
+    }
+}
+
+.expansion-details {
+    display: flex;
+    flex-direction: column;
+    button {
+        color: white;
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+}
+
+.mat-expanded {
+    margin: 0 -10px !important;
+    padding: 0 15px !important;
+    .mat-expansion-panel-header-title {
+       
+    }
+    .expansion-details {
+        margin: 0 -10px;
+    }
+}
+
+.logos {
+    margin-top: 1em;
+    display: flex;
+    .single-logo {
+        flex: 1;
+        padding: 0 10px;
+        align-self: center;
+    }
+    img {
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.isthisyou {
+    .top-title {
+        text-transform: unset;
+    }
+    p {
+        margin: 2.5em 0;
+    }
+    h4 {
+        margin-bottom: 1em;
+    }
+    h5 {
+        margin: 0;
+        font-weight: 100;
+    }
+    .mat-card {
+        -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16);
+        -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16);
+        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16);
+
+    }
+}
+
+.edit-button {
+    color: $blue;
+    font-weight: bold;
+    font-family: 'Poppins';
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    .mat-icon {
+        padding-right: 5px;
+    }   
+}
+
+.acc-edit-buttons {
+    .cancel {
+        font-size: 14px;
+        color: $blue;
+    }
+
+    .save {
+        font-size: 14px;
+    }
+}
+
+.sign-up-form {
+    margin-top: 2em;
+}
+
+.extra-signup-details {
+        margin-bottom: 15px;
+    .extra-details-fields {
+        margin-top: 35px;
+    }
+}
+
+.mat-checkbox-label {
+    font-family: 'Poppins' !important;
+    font-weight: bold !important;
+    color: $grey;
+}
+
+.mat-checkbox-checked .mat-checkbox-label {
+    color: $primary;
+}
+
+.acc-details-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.acc-edit-buttons {
+    align-self: flex-end;
+}
+
+.mat-expansion-panel-body {
+    padding: 16px 24px !important;
+}
+
+.acc-title {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 2.0em;
+    color: white;
+    @include lg {
+        font-size: 2.3em;
+    }
+}
+
+.acc-info {
+    font-family: Poppins;
+    font-weight: bold;
+    color: $dark-white;
+    font-size: 1.1em;
+    line-height: 1.7;
+    @include lg {
+        font-size: 1.8em;
+    }
+}
+
+
+.saving-details {
+    opacity: 0.5;
+}

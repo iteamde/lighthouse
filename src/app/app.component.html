@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-sidenav-container class="site-wrapper">
+
+    <mat-sidenav id="mobile-menu" mode='over' #mainMenu>
+      <mobile-menu (menuToggle)="mainMenu.toggle()"></mobile-menu>
+    </mat-sidenav>
+
+    <mat-sidenav id="mobile-quote" #quoteSide position="end">
+      <app-quote type='mobile' (quoteToggle)="quoteSide.toggle()"></app-quote>
+    </mat-sidenav>
+
+
+    <section class="site" #mainSite (scrollPercentage)="scrollMonitor($event)">
+      <app-header (menuToggle)="mainMenu.toggle()" (quoteToggle)="quoteSide.toggle()"></app-header>
+      <desktop-quote></desktop-quote>
+      <desktop-nav [@fade]></desktop-nav>
+      <section class="main">
+        <router-outlet></router-outlet>
+      </section>
+    </section>
+
+</mat-sidenav-container>

@@ -1,0 +1,27 @@
+<section class="error reg-padding">
+    <div class="illustration-body">
+    <div class="illustration-row" class="six"><img class="illustration-image" src='assets/illustrations/ohno.png'></div>
+
+    <div class="illustration-row" class="four">
+
+    <h4>Error: {{ error.message }}</h4>
+        
+    <h1 class="top-title">Oops!</h1>
+    <p style="margin-bottom: 2em">We’re sorry, something went wrong. If you were in the middle of processing a booking request, give us a call on 03 9646 9034 and one of our friendly office staff will help complete it for you.</p>
+
+
+    <div class="error-buttons">
+        <button
+        mat-raised-button 
+        color="primary" 
+        routerLink="/"
+        class="btn-full">Take me home</button>
+    
+        <button
+        mat-stroked-button 
+        color="primary" 
+        class="btn-full">Contact us</button>
+    </div>
+    </div>
+</div>
+  </section>

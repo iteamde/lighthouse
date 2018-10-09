@@ -1,0 +1,14 @@
+<div class="member-level"
+    [ngClass]="{'blue-grad': level == 1,
+                'silver-grad': level == 2,
+                'gold-grad': level == 3,
+                'platinum-grad': level == 4,
+                'orange-grad': level == 5 || level == 7,
+                'student-grad': level == 6
+    }">
+    <h1 class="acc-title">Hi {{ auth.userDetails.firstName }}, </h1>
+    <div class="acc-info">
+    You're a {{ name }}.
+    Enjoy {{ discountPercent }}% off gear.
+</div>
+</div>

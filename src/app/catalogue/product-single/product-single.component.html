@@ -1,0 +1,96 @@
+<div class="loading-progress" *ngIf="this._progressSpinner"></div>
+
+<div (click)="backClicked()" *ngIf="this._progressSpinner === false" class="single-back reg-padding">
+  <mat-icon class="back-icon">chevron_left</mat-icon> Back
+</div>
+
+<section itemscope itemtype="http://schema.org/Product" class="single-product reg-padding" *ngIf="this._progressSpinner === false">
+
+  <h1 class="top-title" itemprop="name">{{ product.name }}</h1>
+
+  <div class="single-product-block">
+    <div class="single-product-info">
+      <div class="product-image">
+        <img *ngIf="product.image_info" class="single-product-image" src="{{ product.image_info?.url }}" alt="{{ product.name }}">
+
+        <div *ngIf="!product.image_info" class="single-no-image">
+          <mat-icon style="color: white">image</mat-icon>
+        </div>
+      </div>
+
+      <div class="specs-price">
+      <div class="product-specs" *ngIf="product.lighting_specs?.colour_temperature">
+        <div class="spec">
+          <h6>COLOUR TEMPERATURE</h6>
+          <h4>{{ product.lighting_specs.colour_temperature }}</h4>
+        </div>
+        <div class="spec">
+          <h6>LUX AT 2M</h6>
+          <h4>{{ product.lighting_specs.output_at_2m }}</h4>
+        </div>
+        <div class="spec">
+          <h6>POWER TYPE</h6>
+          <h4>{{ product.lighting_specs.power_type }}</h4>
+        </div>
+        <div class="spec">
+          <h6>LUX AT 5M</h6>
+          <h4>{{ product.lighting_specs.output_at_5m }}</h4>
+        </div>
+        <div class="spec">
+          <h6>INPUT WATTS</h6>
+          <h4>{{ product.lighting_specs.power_input_watts }}w</h4>
+        </div>
+        <div class="spec">
+          <h6>LUX AT 8M</h6>
+          <h4>{{ product.lighting_specs.output_at_8m }}</h4>
+        </div>
+      </div>
+
+      <div class="single-product-price">
+        <div class="price">
+          <h6>PRICE PER DAY</h6>
+          <h1><span itemprop="priceCurrency" content="USD">$</span>
+            <span itemprop="price">{{ product.price | number: '1.0-2' }}</span></h1>
+        </div>
+        <div class="add-button">
+          <button [@fadeAnimation]='state' mat-raised-button (click)="addToProject()" color="primary" class="btn-full">Add to
+            quote</button>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="product-description">
+    <h3>Description</h3>
+    <span itemprop="description">
+      {{ product.description }}
+    </span>
+  </div>
+
+<div class="product-extras">
+  <div *ngIf="product.accessories?.length > 0" class="product-includes">
+    <h3>Item includes:</h3>
+
+    <ul class="dashed">
+      <li class="accessories" *ngFor="let acc of product.accessories">
+        {{ acc.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="product.optional_accessories?.length > 0" class="product-accessories">
+    <h3>Optional accessories:</h3>
+    <ul class="dashed">
+      <li class="accessories" *ngFor="let acc of product.optional_accessories">
+        <a [routerLink]="['../'] + acc.slug">{{ acc.name }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</section>

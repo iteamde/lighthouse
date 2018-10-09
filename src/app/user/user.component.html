@@ -1,0 +1,59 @@
+<section class="user reg-padding">
+
+
+    <div *ngIf="auth.authenticated; then authenticated else guest">
+        <!-- template will replace this div -->
+    </div>
+    <ng-template #authenticated>
+        you are already logged in!
+    </ng-template>
+
+    <ng-template #guest>
+        <div class="illustration-body">
+            <div class="illustration-row">
+                <img class="illustration-image desktop-only" src="assets/illustrations/settingup.png">
+            </div>
+            <div class="illustration-row">
+                <div class="not-logged-in">
+                    <h1 class="top-title">Log in</h1>
+                    <div>To continue, you'll need to log in or register an account with us so that we have your details
+                        on hand</div>
+                    <br>
+                    <button mat-raised-button class="btn-full social-login-btn" (click)="this.auth.googleLogin()">
+                        <img src="./assets/google.png" alt="Google Logo">Connect with Google
+                    </button>
+
+                    <!-- <button  mat-raised-button  class="btn-full social-login-btn" (click)="this.auth.facebookLogin()">
+            <img src="./assets/facebook.png" alt="Facebook Logo">Connect with Facebook
+         </button> -->
+
+                    <div class='hr-sect'>or</div>
+
+                    <form #f="ngForm" (ngSubmit)="signIn(f.value)">
+                        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div>
+
+                        <mat-form-field floatLabel="always" class="user-input">
+                            <input type="email" id="inputEmail" name="email" required ngModel matInput placeholder="EMAIL">
+                        </mat-form-field>
+
+                        <mat-form-field floatLabel="always" class="user-input">
+                            <input type="password" id="inputPassword" name="password" required ngModel matInput
+                                placeholder="PASSWORD">
+                        </mat-form-field>
+
+                        <button mat-raised-button class="btn-full" color="primary" type="submit">
+                            Login</button>
+                    </form>
+
+
+                    <h4 style="color: #5F5F5F" class="text-center">Don't have an account? <span class="link" routerLink="/signup">Register</span></h4>
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+</section>

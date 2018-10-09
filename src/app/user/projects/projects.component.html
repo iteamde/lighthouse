@@ -1,0 +1,57 @@
+<section class="projects reg-padding">
+  <h1 class="top-title">Projects</h1>
+  <div class="loading-progress" *ngIf="this.projects$ == ''"></div>
+  <h2>Draft projects</h2>
+
+  <div id="drafts" [@listStagger]="4">
+    <mat-card *ngFor="let item of drafts$ | async" class="draft-project">
+      <div class="dot"></div>
+      <h4>{{ item.title }}</h4>
+      <h5>{{ item.dateRange?.start.seconds * 1000 | date:'d MMM y' }} - {{ item.dateRange?.end.seconds * 1000 | date:'d MMM
+        y' }}</h5>
+      <h6>{{ item.type }}</h6>
+      <h6>{{ item.total_price }}</h6>
+      <span class="project-extras">
+        <a class="pointer" (click)="load(item.id)">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </a>
+      <!-- <a class="pointer" (click)="delete(item.id)">
+          <mat-icon>remove_circle_outline</mat-icon>
+          Delete
+        </a> -->
+      </span>
+    </mat-card>
+
+  </div>
+
+  <div *ngIf="projects$.upcoming">
+    <h2>Upcoming projects</h2>
+    <mat-card *ngFor="let item of projects$.upcoming" class="upcoming-project">
+      <div class="dot"></div>
+      <h4>{{ item.name }}</h4>
+      <h5>{{ item.start_date | date:'d MMM y' }} - {{ item.end_date | date:'d MMM y' }}</h5>
+      <h6>{{ item.project_type }}</h6>
+      <h6>${{ item.total_price | number: '1.2-2' }} ({{ item.item_count }} items)</h6>
+      <!-- <div class="project-extras">
+      <a [href]="['https://lhb.luminuxlab.com/api/project/' + item.id + '/pdf']" target="_blank"><mat-icon>save_alt</mat-icon>Download quote</a>
+    
+    </div> -->
+    </mat-card>
+  </div>
+
+  <div *ngIf="projects$.completed">
+    <h2>Past projects</h2>
+    <mat-card *ngFor="let item of projects$.completed" class="past-project">
+      <div class="dot"></div>
+      <h4>{{ item.name }}</h4>
+      <h5>{{ item.start_date | date:'d MMM y' }} - {{ item.end_date | date:'d MMM y' }}</h5>
+      <h6>{{ item.project_type }}</h6>
+      <h6>${{ item.total_price | number: '1.2-2' }} ({{ item.item_count }} items)</h6>
+      <!-- <div class="project-extras">
+      <a [href]="['https://lhb.luminuxlab.com/api/project/' + item.id + '/pdf']" target="_blank"><mat-icon>save_alt</mat-icon>Download invoice</a>
+    </div> -->
+    </mat-card>
+  </div>
+
+</section>

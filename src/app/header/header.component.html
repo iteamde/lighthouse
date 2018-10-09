@@ -1,0 +1,85 @@
+<header class="no-select" [ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile'}">
+  <!--  MOBILE TOGGLE  -->
+  <div class="mobile-toggle hand-cursor">
+    <div (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </div>
+  </div>
+
+  <!--  MAIN LOGO -->
+  <div class="logo">
+    <a routerLink="/">
+      <img src="../../assets/logo.png" alt="Lighthouse Logo">
+    </a>
+  </div>
+
+  <div class="search-desktop">
+    <form #f="ngForm" (ngSubmit)="search(f.value)" [ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile'}" class="search" [@fade]>
+      <span><mat-icon>search</mat-icon></span>
+      <input type="text" name="search" ngModel autofocus placeholder="Search for gear or packages">
+    </form>
+  </div>
+  <!--  USER CONTROL -->
+  <div class="user-control">
+
+    <div class="desktop-topnav" [ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile' }">
+
+      <ul><a routerLink="about">About</a></ul>
+      <ul><a routerLink="contact">Contact</a></ul>
+      <ul><a routerLink="sponsorship">Sponsorships</a></ul>
+      <ul><a routerLink="user/account" *ngIf="auth.userDetails">{{ auth.userDetails?.firstName }}</a></ul>
+    </div>
+
+
+    <mat-icon (click)="toggleSearch()" class="small-pad-right search-button">
+      search
+    </mat-icon>
+
+
+    <!-- <desktop-quote></desktop-quote> -->
+
+    <div class="cart-button">
+
+
+      <div class="cart-desktop" *ngIf="projectService.cartQuantity">
+        $ {{ projectService.cartDailyCost }}/day
+      </div>
+
+      <mat-icon matBadge="{{ projectService.cartQuantity }}" matBadgeColor="accent" *ngIf='projectService.cartQuantity > 0; else loadedcart'
+        (click)="toggleQuote()" class="small-pad-right hand-cursor">shopping_cart</mat-icon>
+
+      <ng-template #loadedcart>
+        <mat-icon (click)="toggleQuote()" class="small-pad-right hand-cursor">shopping_cart</mat-icon>
+      </ng-template>
+    </div>
+
+    <div class="account-button hand-cursor" *ngIf="auth.authenticated; else accountother">
+      <mat-icon [matMenuTriggerFor]="menu" class="hand-cursor">account_circle</mat-icon>
+      <mat-menu #menu="matMenu" class="account-menu hand-cursor soft-shadow" [overlapTrigger]="false">
+        <div class="user-name">
+          Hi {{ auth.userDetails?.firstName }}
+        </div>
+        <button mat-menu-item routerLink="/user/projects">Projects</button>
+        <button mat-menu-item routerLink="/user/account">Account settings</button>
+        <button mat-menu-item>Credit guidelines</button>
+        <button mat-menu-item (click)="auth.signOut()" routerLink="/">Logout</button>
+      </mat-menu>
+
+    </div>
+
+    <ng-template #accountother>
+      <mat-icon routerLink="/login">account_circle</mat-icon>
+    </ng-template>
+
+  </div>
+
+
+</header>
+
+<!-- <desktop-quote class="soft-shadow"></desktop-quote> -->
+
+<form #f="ngForm" (ngSubmit)="search(f.value)" [ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile'}" class="search reg-padding"
+  [@fade] *ngIf="searchOpen">
+  <span><mat-icon>search</mat-icon></span>
+  <input type="text" name="search" ngModel autofocus placeholder="Search for gear or packages">
+</form>

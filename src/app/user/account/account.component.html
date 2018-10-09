@@ -1,0 +1,151 @@
+<section class="account">
+    <div class="loading-progress" *ngIf="progressSpinner"></div>
+
+    <div *ngIf="auth.authenticated">
+
+        <member-level></member-level>
+        <div class="acc-padding">
+
+            <mat-accordion>
+                <!-- Personal details  -->
+                <mat-expansion-panel (opened)="personalOpenState = true" (closed)="personalOpenState = false" [expanded]="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <h4 [ngClass]="{'dark-grey': personalOpenState}">Personal details</h4>
+                        </mat-panel-title>
+                        <!-- <mat-panel-description>
+                        {{personalOpenState ? 'open' : 'closed'}}
+                      </mat-panel-description> -->
+                    </mat-expansion-panel-header>
+
+                    <div class="expansion-details">
+                        <form #personalDetails="ngForm" class="acc-details-form" [ngClass]="{ 'saving-details': personalSaving }">
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="First Name" [disabled]="personalDisabled" [ngModel]="this.user.firstName" name="firstName">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Last Name" [disabled]="personalDisabled" [ngModel]="this.user.lastName" name="lastName">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Phone number" [disabled]="personalDisabled" [ngModel]="this.user.phoneNumber" name="phoneNumber">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input name="address" [ngModel]="this.user.addressStreet1 + ', ' + user.addressCity + ', ' + user.addressState + ', ' + user.addressPostalCode"
+                                    ngx-google-places-autocomplete [options]='addressService.placesOptions' required [disabled]="personalDisabled"
+                                    matInput #places="ngx-places" placeholder="ADDRESS" (onAddressChange)="personalAddressChange($event)"
+                                />
+                            </mat-form-field>
+
+                            <input type="hidden" name="addressCity" [ngModel]="personalCity">
+                            <input type="hidden" name="addressCountry" [ngModel]="personalCountry">
+                            <input type="hidden" name="addressPostalCode" [ngModel]="personalPostalCode">
+                            <input type="hidden" name="addressState" [ngModel]="personalState">
+                            <input type="hidden" name="addressStreet1" [ngModel]="personalStreet1">
+
+                            <div class="acc-edit-buttons">
+                                <div class="edit-button" *ngIf="personalDisabled && !personalSaving" (click)="switchPersonal()">
+                                    <mat-icon>edit</mat-icon> Edit
+                                </div>
+                                <button mat-button class="cancel" *ngIf="!personalDisabled && !personalSaving" (click)="switchPersonal()">Cancel</button>
+                                <button mat-raised-button color="primary" class="save" *ngIf="!personalDisabled && !personalSaving" (click)="savePersonal(personalDetails.value)">Save</button>
+                                <div *ngIf="personalSaving">Saving...</div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+
+                <!-- Production Company details  -->
+                <mat-expansion-panel (opened)="companyOpenState = true" (closed)="companyOpenState = false">
+                    <mat-expansion-panel-header expandedHeight="100px" collapsedHeight="80px">
+                        <mat-panel-title>
+                            <h4 [ngClass]="{'dark-grey': companyOpenState}">Production company details</h4>
+                        </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <div class="expansion-details">
+                        <form class="acc-details-form" #companyDetails="ngForm" [ngClass]="{ 'saving-details': companySaving }">
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Your Position" [disabled]="companyDisabled" [ngModel]="this.user.companyPosition" name="companyPosition">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Phone Number" [disabled]="companyDisabled" [ngModel]="this.user.companyName" name="companyName">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Company Name" [disabled]="companyDisabled" [ngModel]="this.user.companyPhoneNumber" name="companyPhoneNumber">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Company Address" [disabled]="companyDisabled" ngx-google-places-autocomplete [options]='addressService.placesOptions'
+                                    required #places="ngx-places" [ngModel]="this.user.companyAddressStreet1 + ', ' + user.companyAddressCity + ', ' + user.companyAddressState + ', ' + user.companyAddressPostalCode"
+                                    name="companyAddress" (onAddressChange)="companyAddressChange($event)">
+                            </mat-form-field>
+
+
+                            <div class="acc-edit-buttons">
+                                <div class="edit-button" *ngIf="companyDisabled && !companySaving" (click)="switchCompany()">
+                                    <mat-icon>edit</mat-icon> Edit
+                                </div>
+                                <button mat-button class="cancel" *ngIf="!companyDisabled && !companySaving" (click)="switchCompany()">Cancel</button>
+                                <button mat-raised-button color="primary" class="save" *ngIf="!companyDisabled && !companySaving" (click)="saveCompany(companyDetails.value)">Save</button>
+                                <div *ngIf="companySaving">Saving...</div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+
+                <!-- Student details  -->
+                <mat-expansion-panel (opened)="studentOpenState = true" (closed)="studentOpenState = false" style="margin-bottom: 100px !important">
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title>
+                            <h4 [ngClass]="{'dark-grey': studentOpenState}">Student details</h4>
+                        </mat-panel-title>
+                        <!-- <mat-panel-description>
+                  {{studentOpenState ? 'open' : 'closed'}}
+                </mat-panel-description> -->
+                    </mat-expansion-panel-header>
+                    <div class="expansion-details">
+                        <form class="acc-details-form" #studentDetails="ngForm" [ngClass]="{ 'saving-details': studentSaving }">
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput placeholder="Student ID Number" [disabled]="studentDisabled" [ngModel]="this.user.studentIdNumber" name="studentIdNumber">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput [disabled]="studentDisabled" [ngModel]="this.user.studentCourseName" placeholder="Course Name" name="studentCourseName">
+                            </mat-form-field>
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput [disabled]="studentDisabled" [ngModel]="this.user.studentSchoolName" placeholder="School Name" name="studentSchoolName">
+                            </mat-form-field>
+
+
+                            <mat-form-field floatLabel="always">
+                                <input matInput [disabled]="studentDisabled" [ngModel]="this.user.studentGraduationYear" placeholder="Graduation Year" name="studentGraduationYear">
+                            </mat-form-field>
+
+                            <div class="acc-edit-buttons">
+                                <div class="edit-button" *ngIf="studentDisabled && !studentSaving" (click)="switchStudent()">
+                                    <mat-icon>edit</mat-icon> Edit
+                                </div>
+                                <button mat-button class="cancel" *ngIf="!studentDisabled && !studentSaving" (click)="switchStudent()">Cancel</button>
+                                <button mat-raised-button color="primary" class="save" *ngIf="!studentDisabled && !studentSaving" (click)="saveStudent(studentDetails.value)">Save</button>
+                                <div *ngIf="studentSaving">Saving...</div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+
+            </mat-accordion>
+
+        </div>
+
+
+    </div>
+</section>

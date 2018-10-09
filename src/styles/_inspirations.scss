@@ -1,0 +1,243 @@
+@import 'variables';
+
+$silver: #C4C4C4;
+$hover: #353535;
+
+.inspirations {
+  background: #131313;
+  color: white;
+  padding-bottom: 4em !important;
+  h1 {
+    margin: 0;
+    padding: 1.5em 0;
+    color: $dark-white;
+  }
+}
+
+.filter-text {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inspo-image {
+  position: relative;
+  display: block;
+  background: #F1F1F1;
+  padding-bottom: 59%;
+  background-size: cover;
+}
+
+@include md {
+  .single-inspo-body {
+    display: flex;
+  }
+
+  .single-inspo-image {
+    flex: 3;
+  }
+
+  .gear-used {
+    padding-left: 20px;
+  }
+
+  .inspo-specs {
+    display: flex;
+  }
+
+  .inspo-spec {
+    flex: 1;
+  }
+}
+
+.dark {
+
+
+  .mat-form-field-infix {
+    border: 1px solid white !important;
+  }
+  .mat-select-arrow {
+    color: white;
+  }
+  .mat-select-value {
+    font-family: 'Poppins' !important;
+    font-weight: 600 !important;
+    color: white;
+  }
+  .mat-form-field-label {
+    color: $silver !important;
+  }
+}
+
+.inspo-tile {
+  margin-bottom: 20px;
+}
+
+.inspo-padding {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.inspo-heading {
+  width: 80%;
+}
+
+@include sm {
+  .inspo-tile {
+    max-width: calc(50% - 20px);
+  }
+
+  .inspo-padding {
+    padding: 0 30px 0 50px;
+  }
+
+  .inspo-filter-inner {
+    display: flex;
+  }
+  .inspo-filter {
+    flex: 1;
+    margin-right: 20px;
+  }
+}
+
+.inspo-filters {
+  padding-right: 20px;
+}
+
+@include lg {
+
+  .inspo-filter-inner {
+    flex: 3;
+  }
+
+  .inspo-heading {
+    width: 70%;
+  }
+
+  .inspo-filters {
+    display: flex;
+  }
+
+  .gear-used,
+  .inspo-specs {
+    flex: 1;
+  }
+
+  .inspo-filter {
+    flex: 1;
+    margin-right: 35px;
+  }
+
+  .inspo-info {
+    display: flex;
+  }
+}
+
+.inspo-filter {
+  display: flex;
+  font-family: "Poppins";
+  flex-direction: column;
+
+  .mat-form-field-infix {
+    margin-top: 0 !important;
+  }
+
+  .filter-button:first-of-type {
+    margin-right: 25px;
+  }
+}
+
+.inspo-filter:last-of-type {
+  margin-right: 0;
+}
+
+.btns {
+  display: flex;
+}
+
+.filter-close {
+  font-size: 16px;
+  height: 16px !important;
+  width: 16px !important;
+  align-self: center;
+}
+
+.filter-button {
+  border: 1px solid white;
+  width: 100%;
+  padding: 7.5px 15px;
+  max-width: 100px;
+  display: flex;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
+}
+
+.filter-button:hover {
+  background-color: $hover;
+}
+
+.filter-selected {
+  background-color: $hover;
+}
+
+.filter-label {
+  font-family: "Poppins";
+  font-weight: bold;
+  color: $silver !important;
+  font-size: 13px;
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+
+.inspo-label {
+  font-weight: 600;
+  font-family: "Poppins";
+}
+
+.inspo-tile img {
+  width: 100%;
+}
+
+.inspo-tiles {
+  margin-top: 2em;
+}
+
+.single-inspo {
+  position: fixed;
+  top: 0;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-inspo-inner {
+  background: #202020;
+  padding: 25px;
+  margin: 25px;
+  max-width: 700px;
+  color: white;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.38) !important;
+  .gear-used {
+    p {
+      margin: 0;
+    }
+  }
+  img {
+    width: 100%;
+  }
+  .close-btn {
+    float: right;
+    color: white;
+    cursor: pointer;
+  }
+}

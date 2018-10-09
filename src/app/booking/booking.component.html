@@ -1,0 +1,518 @@
+<section class="booking reg-padding quote-padding">
+
+  <mat-horizontal-stepper class="top-margin" linear #stepper>
+
+    <!-- PROJECT DETAILS -->
+    <mat-step [stepControl]="projectDetailsGroup" [editable]="true">
+      <ng-template matStepLabel>Project details</ng-template>
+      <div class="illustration-body">
+        <div class="illustration-row desktop-only" id="project-details-image"><img class="illustration-image" style="transform: scaleX(-1);"
+            src='assets/illustrations/requestsent.png'></div>
+
+        <div class="illustration-row">
+
+          <h1 class="top-title">Project details</h1>
+          <p>Entering your project details will allow you so you can find it easily in your projects page. The more we
+            understand
+            about your project, the better we can help you </p>
+          <br>
+          <form [formGroup]="projectDetails" #projectDetailsGroup="ngForm" fireForm path="projects/{{ projectId }}">
+
+            <mat-form-field floatLabel="always">
+              <input matInput placeholder="Project Name" formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field floatLabel="always">
+              <mat-select formControlName="type" placeholder="Project Type">
+                <mat-option value="TVC">TVC</mat-option>
+                <mat-option value="Short Film">Short Film</mat-option>
+                <mat-option value="Music Video">Music Video</mat-option>
+                <mat-option value="Feature Film">Feature Film</mat-option>
+                <mat-option value="Content">Content</mat-option>
+                <mat-option value="TV Series">TV Series</mat-option>
+                <mat-option value="Web series">Web series</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+
+            <div class="input-labels" style="margin-bottom: 0.5em;">Shoot dates</div>
+            <datepicker></datepicker>
+
+            <div class="dates-warning">
+              <div class="achtung">
+                <mat-icon>info</mat-icon>
+              </div>
+              <div class="warning-text">
+                Keep in mind that changing your projects date will affect the current price, as our gear is priced per
+                day.
+              </div>
+            </div>
+            <mat-form-field class="notes" floatLabel="always">
+              <textarea matInput matTextareaAutosize formControlName="notes" placeholder="Leave a comment"></textarea>
+            </mat-form-field>
+
+
+            <div>
+              <button mat-raised-button color="primary" class="btn-full" matStepperNext>Collection & return ></button>
+            </div>
+
+            <!-- <hr> Fireform state: {{ state }} <br>
+            <hr>
+        
+            <button mat-raised-button color="primary" [disabled]="projectDetails.invalid || state !== 'modified'">Save</button>
+         -->
+
+          </form>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- COLLECTION & RETURN -->
+
+    <mat-step [stepControl]="collectionReturnGroup" [editable]="true">
+      <ng-template matStepLabel>Collection & Return</ng-template>
+      <div class="illustration-body">
+        <!-- <div class="illustration-row"><img class="illustration-image"
+            src='assets/illustrations/gear.png'></div> -->
+
+        <div class="illustration-row">
+          <h1 class="top-title">Collection & return</h1>
+          <form [formGroup]="collectionReturnGroup" class="collection-return" #collectionReturn="ngForm">
+            <h2>Choose a collection option</h2>
+
+            <mat-radio-group formControlName="collection">
+              <h5>You pickup</h5>
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Standard Pickup"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('collection', 'Standard Pickup')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.collection == 'Standard Pickup'}"
+                      class="options-title">
+                      <h5>Standard Pickup</h5>
+                      <h5 class="price">FREE</h5>
+                    </div>
+                    <p>Collect your hire from our warehouse between 9am - 5pm, Monday - Friday</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="24/7 Pickup"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('collection', '24/7 Pickup')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.collection == '24/7 Pickup'}" class="options-title">
+                      <h5>24/7 Pickup</h5>
+                      <h5 class="price">+$25</h5>
+                    </div>
+                    <p>Collect gear from our warehouse outside of normal business hours</p>
+                  </div>
+                </div>
+              </div>
+
+              <h5 style="margin-top: 0">.. or we drop off</h5>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('collection', 'Express')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.collection == 'Express'}" class="options-title">
+                      <h5>Lighthouse Express</h5>
+                      <h5 class="price">+$55</h5>
+                    </div>
+                    <p>Delivery at a time we specify the day before your hire, dropped off between 10am - 4pm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express Priority"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('collection', 'Express Priority')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.collection == 'Express Priority'}"
+                      class="options-title">
+                      <h5>Lighthouse Express Priority</h5>
+                      <h5 class="price">+$70</h5>
+                    </div>
+                    <p>Delivery at any time you request, dropped off between 8am - 6pm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express Afterhours"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('collection', 'Express Afterhours')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.collection == 'Express Afterhours'}"
+                      class="options-title">
+                      <h5>Lighthouse Express Afterhours</h5>
+                      <h5 class="price">+$110</h5>
+                    </div>
+                    <p>Delivery at any time you request, outside of our priority delivery hours</p>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-group>
+
+            <h2 id="return">Choose a return option</h2>
+            <mat-radio-group formControlName="return">
+              <h5>You drop off</h5>
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Standard Return"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('return', 'Standard Return')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.return == 'Standard Return'}" class="options-title">
+                      <h5>Standard Return</h5>
+                      <h5 class="price">FREE</h5>
+                    </div>
+                    <p>Return your hire from our warehouse between 9am - 5pm, Monday - Friday</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="24/7 Return"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('return', '24/7 Return')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.return == '24/7 Return'}" class="options-title">
+                      <h5>24/7 Return</h5>
+                      <h5 class="price">+$25</h5>
+                    </div>
+                    <p>Return gear from our warehouse outside of normal business hours</p>
+                  </div>
+                </div>
+              </div>
+
+              <h5 style="margin-top: 0">We pickup</h5>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('return', 'Express')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.return == 'Express'}" class="options-title">
+                      <h5>Lighthouse Express</h5>
+                      <h5 class="price">+$55</h5>
+                    </div>
+                    <p>Collection at any time we specify the day before your hire, dropped off between 10am - 4pm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express Priority"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('return', 'Express Priority')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.return == 'Express Priority'}" class="options-title">
+                      <h5>Lighthouse Express Priority</h5>
+                      <h5 class="price">+$70</h5>
+                    </div>
+                    <p>Collection at any time you request, dropped off between 8am - 6pm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-info">
+                <div class="radio-option">
+                  <mat-radio-button color="primary" value="Express Afterhours"></mat-radio-button>
+                  <div class="radio-option-details" (click)="selectOption('return', 'Express Afterhours')">
+                    <div [ngClass]="{'primary': this.collectionReturnGroup.value.return == 'Express Afterhours'}" class="options-title">
+                      <h5>Lighthouse Express Afterhours</h5>
+                      <h5 class="price">+$110</h5>
+                    </div>
+                    <p>Collection at any time you request, outside of our priority delivery hours</p>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-group>
+
+            <div>
+              <button mat-raised-button color="primary" class="btn-full" (click)="validate('collectionReturn')"
+                matStepperNext>Billing
+                details ></button>
+
+              <button mat-stroked-button color="primary" class="btn-full" matStepperPrevious>
+                < Project Details</button> </div> </form> </div> </div> </mat-step> <!-- BILLING DETAILS -->
+                  <mat-step [stepControl]="billingDetailsGroup" [editable]="true">
+                    <ng-template matStepLabel>Billing</ng-template>
+                    <form [formGroup]="billingDetailsGroup" #billingDetails="ngForm">
+                      <h1 class="top-title">Billing Details</h1>
+                      <mat-radio-group formControlName="billingOption">
+                        <div class="radio-options">
+
+                          <!-- USE PERSONAL BILLING DETAILS -->
+                          <div *ngIf="userInfo" class="option-info">
+                            <div class="radio-option">
+                              <mat-radio-button color="primary" value="personal"></mat-radio-button>
+                              <div [ngClass]="{'primary': billingDetails.value.billingOption == 'personal'}" class="radio-option-details"
+                                (click)="selectOption('billing', 'personal')">
+                                <h5>Use my personal billing details</h5>
+                                <h6>Name</h6>
+                                <p>{{ userInfo.firstName }} {{ userInfo.lastName }}</p>
+                                <h6>Billing Address</h6>
+                                <p>{{ userInfo.addressStreet1 }}, {{ userInfo.addressCity }}</p>
+                                <h6>Contact Number</h6>
+                                <p>{{ userInfo.phoneNumber }}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- USE COMPANY BILLING DETAILS  -->
+                          <div *ngIf="userInfo" class="option-info">
+                            <div class="radio-option">
+                              <mat-radio-button color="primary" value="company"></mat-radio-button>
+                              <div [ngClass]="{'primary': billingDetails.value.billingOption == 'company'}" class="radio-option-details"
+                                (click)="selectOption('billing', 'company')">
+                                <h5>Use my company's billing details</h5>
+                                <h6>Name</h6>
+                                <p>{{ userInfo.firstName }} {{ userInfo.lastName }}</p>
+                                <h6>Company Name</h6>
+                                <p>{{ userInfo.companyName }}</p>
+                                <h6>Billing Address</h6>
+                                <p>{{ userInfo.companyAddressStreet1 }}, {{ userInfo.companyAddressCity }}</p>
+                                <h6>Contact Number</h6>
+                                <p>{{ userInfo.phoneNumber }}</p>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <!-- USE CUSTOM BILLING DETAILS -->
+                          <div class="option-info">
+                            <div class="radio-option">
+                              <mat-radio-button color="primary" value="custom"></mat-radio-button>
+                              <div [ngClass]="{'primary': billingDetails.value.billingOption == 'custom'}" class="radio-option-details"
+                                (click)="selectOption('billing', 'custom')">
+                                <h5>Use other billing details for this project</h5>
+
+                                <div *ngIf="this.billingDetails.value.billingOption == 'custom'" class="custom-billing-details">
+                                  <p>Who would you like the invoice to be addressed to?</p>
+                                  <div class="billing-buttons">
+                                    <div class="billing-button selected" [ngClass]="{'selected': customBillingSelect == 'personal'}"
+                                      (click)="customSelect('personal')">Personal</div>
+                                    <div class="billing-button" [ngClass]="{'selected': customBillingSelect == 'company'}"
+                                      (click)="customSelect('company')">Company</div>
+                                  </div>
+                                  <br>
+                                  <form [formGroup]="customBillingGroup" #customBilling="ngForm">
+
+                                    <mat-form-field *ngIf="customBillingSelect == 'company'" floatLabel="always">
+                                      <input matInput placeholder="Company Name" formControlName="companyName">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always">
+                                      <input matInput placeholder="Billing Email" formControlName="email">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always">
+                                      <input matInput placeholder="Contact Number" formControlName="phoneNumber">
+                                    </mat-form-field>
+
+                                    <mat-form-field floatLabel="always">
+                                      <input formControlName="billingAddress" ngx-google-places-autocomplete [options]='addressService.placesOptions'
+                                        required autocomplete="off" matInput #places="ngx-places" placeholder="ADDRESS"
+                                        (onAddressChange)="addressChange($event)" />
+                                    </mat-form-field>
+
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </mat-radio-group>
+
+
+
+                      <div>
+                        <button mat-raised-button color="primary" class="btn-full" (click)="goToReview()"
+                          matStepperNext>Review
+                          booking request ></button>
+                        <button mat-stroked-button color="primary" class="btn-full" matStepperPrevious>
+                          < Collection & return</button> </div> </form> </mat-step> <!-- REVIEW -->
+                            <mat-step>
+                              <ng-template matStepLabel>Review</ng-template>
+                              <colour-spinner *ngIf="submitting" class="center"></colour-spinner>
+                              <section class="booking-review" *ngIf="!submitting">
+                                <h1 class="top-title">Review</h1>
+
+                                <div class="block">
+                                  <h2>Project Details</h2>
+                                  <h6>PROJECT NAME</h6>
+                                  <span>{{ projectDetails.value.title }} </span>
+                                  <div class="review-dates">
+                                    <div class="review-dates-date">
+                                      <h6>START DATE</h6>
+                                      <span>{{ dateDetails.value.dateStart | date:'d MMM yyyy' }} </span>
+                                    </div>
+                                    <div class="review-dates-date">
+                                      <h6>END DATE</h6>
+                                      <span>{{ dateDetails.value.dateEnd | date:'d MMM yyyy' }} </span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <h2>Notes / requests</h2>
+                                <div class="notes">{{ projectDetails.value.notes }}</div>
+
+                                <div class="block">
+                                  <h2>Gear</h2>
+                                  <div class="project-cart">
+                                    <h6 class="qty qty-head">QTY</h6>
+                                    <h6 class="name">NAME</h6>
+                                    <h6 class="price">PRICE/day</h6>
+                                  </div>
+                                  <div class="project-cart" *ngFor="let item of items | async">
+                                    <div class="qty"><span>{{ item.quantity }}</span></div>
+                                    <div class="name">{{ item.product.name }}</div>
+                                    <div class="price">${{ item.product.price * item.quantity | number: '1.2-2' }}</div>
+                                  </div>
+                                </div>
+
+                                <div class="block">
+                                  <h2>Collection and return</h2>
+                                  <h6>Collection Option</h6>
+                                  <span>{{ collectionReturn.value.collection }}</span>
+                                  <h6>Return Option</h6>
+                                  <span>{{ collectionReturn.value.return }}</span>
+                                </div>
+
+                                <div class="block">
+                                  <h2>Billing Details</h2>
+
+                                  <div *ngIf="billingDetails.value.billingOption == 'personal'">
+                                    <h6>Name</h6>
+                                    <span>{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+                                    <h6>Billing Address</h6>
+                                    <span>{{ userInfo.addressStreet1 }}, {{ userInfo.addressCity }}</span>
+                                    <h6>Contact Number</h6>
+                                    <span>{{ userInfo.phoneNumber }}</span>
+                                  </div>
+
+                                  <div *ngIf="billingDetails.value.billingOption == 'company'">
+                                    <h6>Name</h6>
+                                    <span>{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+                                    <h6>Company Name</h6>
+                                    <span>{{ userInfo.companyName }}</span>
+                                    <h6>Billing Address</h6>
+                                    <span>{{ userInfo.companyAddressStreet1 }}, {{ userInfo.companyAddressCity }}</span>
+                                    <h6>Contact Number</h6>
+                                    <span>{{ userInfo.phoneNumber }}</span>
+                                  </div>
+
+                                  <div *ngIf="billingDetails.value.billingOption == 'custom' && customBillingSelect == 'personal'">
+                                    <h6>Name</h6>
+                                    <span>{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+                                    <h6>Billing Address</h6>
+                                    <span>{{ customBillingGroup.value.billingAddressStreet1 }}, {{
+                                      customBillingGroup.value.billingAddressCity }}</span>
+                                    <h6>Contact Number</h6>
+                                    <span>{{ customBillingGroup.value.phoneNumber }}</span>
+                                  </div>
+
+                                  <div *ngIf="billingDetails.value.billingOption == 'custom' && customBillingSelect == 'company'">
+                                    <h6>Name</h6>
+                                    <span>{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+                                    <h6>Company Name</h6>
+                                    <span>{{ customBillingGroup.value.companyName }}</span>
+                                    <h6>Billing Address</h6>
+                                    <span>{{ customBillingGroup.value.billingAddressStreet1 }}, {{
+                                      customBillingGroup.value.billingAddressCity }}</span>
+                                    <h6>Contact Number</h6>
+                                    <span>{{ customBillingGroup.value.phoneNumber }}</span>
+                                  </div>
+                                </div>
+
+                                <div class="review-totals purple-grad invert">
+                                  <div class="cart-total totals billing-total">
+                                    <div class="daily-totals">
+                                      <div>
+                                        <h6>DAILY RATE</h6>
+                                        <p>${{ projectService.cartDailyCost | number: '1.2-2' }}</p>
+                                      </div>
+                                      <div style="margin: 0 25px;">x</div>
+                                      <div>
+                                        <h6>DAYS REQUIRED</h6>
+                                        <p>{{ dateDetails.value.billableDays }}</p>
+                                      </div>
+                                    </div>
+                                    <div class="main-totals">
+                                      <div class="item-total">
+                                        <h6>SUBTOTAL</h6> <span class="item-total-value">${{
+                                          projectService.cartDailyCost *
+                                          dateDetails.value.billableDays
+                                          | number: '1.2-2' }}</span>
+                                      </div>
+                                      <div class="item-total">
+                                        <h6>DISCOUNT ({{ userInfo?.membershipDiscount }}%)</h6> <span class="item-total-value">-${{
+                                          ((projectService.cartDailyCost
+                                          * dateDetails.value.billableDays) * (userInfo?.membershipDiscount/100) ) |
+                                          number: '1.2-2' }}</span>
+                                      </div>
+                                    </div>
+
+                                    <div class="main-totals">
+                                      <div class="item-total">
+                                        <h6>COLLECTION ({{ this.collectionReturnGroup.value.collection }})</h6>
+                                        <span class="item-total-value">${{
+                                          collectionReturnPrice(this.collectionReturnGroup.value.collection) }}</span>
+                                      </div>
+                                      <div class="item-total">
+                                        <h6>RETURN ({{ this.collectionReturnGroup.value.return }})</h6>
+                                        <span class="item-total-value">${{
+                                          collectionReturnPrice(this.collectionReturnGroup.value.return) }}</span>
+                                      </div>
+                                    </div>
+
+                                    <div class="main-totals">
+                                      <div class="item-total">
+                                        <h6>TOTAL</h6>
+                                        <span class="item-total-value">${{ ((projectService.cartDailyCost *
+                                          dateDetails.value.billableDays) - ((projectService.cartDailyCost
+                                          * dateDetails.value.billableDays) * (userInfo?.membershipDiscount/100))) +
+                                          collectionReturnPrice(this.collectionReturnGroup.value.collection)
+                                          + collectionReturnPrice(this.collectionReturnGroup.value.return) | number:
+                                          '1.2-2' }}</span>
+                                      </div>
+                                      <div class="item-total">
+                                        <h6>GST (10%)</h6>
+                                        <span class="item-total-value">${{ ((projectService.cartDailyCost *
+                                          dateDetails.value.billableDays) - ((projectService.cartDailyCost
+                                          * dateDetails.value.billableDays) * (userInfo?.membershipDiscount/100)) +
+                                          collectionReturnPrice(this.collectionReturnGroup.value.collection)
+                                          + collectionReturnPrice(this.collectionReturnGroup.value.return)) /10 |
+                                          number:
+                                          '1.2-2' }}</span>
+                                      </div>
+                                    </div>
+
+                                    <div class="main-totals">
+                                      <div class="item-total no-border">
+                                        <h6>GRANT TOTAL inc. GST</h6>
+                                        <span class="item-total-value">
+                                          <h2>${{ (((projectService.cartDailyCost * dateDetails.value.billableDays) -
+                                            ((projectService.cartDailyCost
+                                            * dateDetails.value.billableDays) * (userInfo?.membershipDiscount/100))) +
+                                            collectionReturnPrice(this.collectionReturnGroup.value.collection)
+                                            + collectionReturnPrice(this.collectionReturnGroup.value.return)) +
+                                            (((projectService.cartDailyCost *
+                                            dateDetails.value.billableDays) - ((projectService.cartDailyCost *
+                                            dateDetails.value.billableDays) *
+                                            (userInfo?.membershipDiscount/100)) +
+                                            collectionReturnPrice(this.collectionReturnGroup.value.collection)
+                                            + collectionReturnPrice(this.collectionReturnGroup.value.return)) /10) |
+                                            number: '1.2-2' }}</h2>
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <button mat-raised-button color="white" (click)="sendBookingRequest()" class="btn-full send-booking"
+                                      matStepperNext>Send
+                                      booking request</button>
+                                    <button class="btn-full" mat-stroked-button matStepperPrevious>
+                                      < Billing details</button> </div> <div>
+                                  </div>
+                                </div>
+                              </section>
+                            </mat-step>
+  </mat-horizontal-stepper>
+
+</section>

@@ -1,0 +1,58 @@
+<section class="catalogue">
+
+    <h1 class="top-title">Vehicles</h1>
+    
+    <div class="loading-progress" *ngIf="this._progressSpinner"></div>
+
+    <div *ngIf="this._progressSpinner === false">
+
+            <section class="catalogue-wrapper" 
+            fxLayoutAlign="start center" 
+            [@listStagger]="products$.length" 
+            fxLayout="row wrap" 
+            fxLayoutGap.xs="10px"
+            fxLayoutGap="20px" 
+            *ngFor="let cat of products$ | keys">
+                <div *ngFor="let product of products$[cat]" fxFlex="calc(100% - 20px)" fxFlex.xs="calc(100% - 10px)"
+                    class="product-tile vehicle-tile">
+                    <vehicle-tile [product]="product" [projectCart]="projectCart"></vehicle-tile>
+                </div>
+            </section>
+    
+            <!-- <div *ngFor="let cat$ of products$">
+        
+            <div 
+            *ngFor="let product of cat$" 
+            fxFlex="calc(25% - 10px)" 
+            fxFlex.xs="calc(50% - 10px)" 
+            class="product-tile">
+                <product-tile [product]="product" [projectCart]="projectCart"></product-tile>
+            </div>
+        </div> -->
+    
+    
+        </div>
+
+    <!-- <div *ngIf="this._progressSpinner === false">
+        <div 
+        class="catalogue-wrapper"
+        fxLayoutAlign="start center" 
+
+        [@listStagger]="products$.length" 
+        *ngFor="let vehicles of products$"
+        fxLayout="row wrap" 
+        fxLayoutGap="10px">
+    
+            <div 
+            *ngFor="let product of vehicles" 
+            fxFlex="calc(100% - 10px)" 
+            fxFlex.xs="calc(100% - 10px)" 
+
+            class="product-tile vehicle-tile">
+                <vehicle-tile [product]="product" [projectCart]="projectCart"></vehicle-tile>
+            </div>
+        
+    </div>
+</div> -->
+    
+    </section>

@@ -1,0 +1,137 @@
+<section class="inspirations inspo-padding">
+  <h1 class="inspo-heading">We've put together a collection of photos from our past shoots, to give you some tips on
+    lighting design.</h1>
+
+  <section class="inspo-filters">
+    <div class="inspo-filter">
+      <div class="filter-label">
+        SHOOT TYPE
+      </div>
+      <mat-form-field class="dark">
+        <mat-select class="dark" name="shootType" (selectionChange)="changeShootType($event)">
+          <mat-option value="">All</mat-option>
+          <mat-option value="tvc">TVC</mat-option>
+          <mat-option value="short_film">Short Film</mat-option>
+          <mat-option value="music_video">Music Video</mat-option>
+          <mat-option value="feature_film">Feature Film</mat-option>
+          <mat-option value="content">Content</mat-option>
+          <mat-option value="tv_series">TV Series</mat-option>
+          <mat-option value="web_series">Web Series</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="inspo-filter-inner">
+    <div class="inspo-filter">
+      <div class="filter-label">
+        TIME OF DAY
+      </div>
+      <div class="btns">
+        <div class="filter-button" [ngClass]="{'filter-selected': dayFilter }" (click)="filterSwitch('day')">
+          <img src="./assets/inspirations/sun.svg" class="filter-icon">
+          <span class="filter-text">day</span>
+          <mat-icon *ngIf="dayFilter" class="filter-close">close</mat-icon>
+        </div>
+        <div class="filter-button" [ngClass]="{'filter-selected': nightFilter }" (click)="filterSwitch('night')">
+            <img src="./assets/inspirations/moon.svg" class="filter-icon">
+            <span class="filter-text">night</span>
+            <mat-icon *ngIf="nightFilter" class="filter-close">close</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="inspo-filter">
+      <div class="filter-label">
+        LOCATION
+      </div>
+      <div class="btns">
+        <div class="filter-button" [ngClass]="{'filter-selected': outdoorFilter }" (click)="filterSwitch('outdoor')">
+            <img src="./assets/inspirations/tree.svg" class="filter-icon">
+            <span class="filter-text">outdoors</span>
+            <mat-icon *ngIf="outdoorFilter" class="filter-close">close</mat-icon>
+        </div>
+        <div class="filter-button" [ngClass]="{'filter-selected': indoorFilter }" (click)="filterSwitch('indoor')">
+            <img src="./assets/inspirations/house.svg" class="filter-icon">
+            <span class="filter-text">indoors</span>
+            <mat-icon *ngIf="indoorFilter" class="filter-close">close</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+
+
+
+  <section class="inspo-tiles" fxLayoutAlign="start center" *ngIf="inspo" [@listStagger]="inspo.length" fxLayout="row wrap"
+    fxLayoutGap.xs="10px" fxLayoutGap="20px">
+
+
+    <div *ngFor="let item of inspo" fxFlex="calc(50% - 20px)" fxFlex.xs="calc(100%)" class="inspo-tile" (click)="showInspo(item)">
+      <div class="inspo-image" [style.background-image]="'url(' + item.acf.image.sizes.large + ')' | safe: 'style'"></div>
+    </div>
+  </section>
+
+</section>
+
+<section *ngIf="displayed" class="single-inspo">
+  <div class="single-inspo-inner">
+    <div class="close-btn" (click)="closeInspo()">
+      <mat-icon>close</mat-icon>
+    </div>
+
+    <div class="single-inspo-body">
+      <div class="single-inspo-image">
+        <img src="{{ displayedItem.acf.image.sizes.large }}">
+      </div>
+      <div class="gear-used">
+        <div class="inspo-label">
+          GEAR USED
+        </div>
+
+
+        <p *ngFor="let gear of displayedItemGear">- {{ gear.name }}</p>
+
+
+
+      </div>
+    </div>
+
+    <div class="inspo-specs">
+
+      <div class="inspo-spec">
+
+        <div class="inspo-label">
+          CAMERA INFO
+        </div>
+        <div>{{ displayedItem.acf.camera }}</div>
+      </div>
+
+      <div class="inspo-spec">
+
+        <div class="inspo-label">
+          LENS INFO
+        </div>
+        <div>{{ displayedItem.acf.lens_info }}</div>
+
+      </div>
+
+      <div class="inspo-spec">
+        <div class="inspo-label">
+          GAFFER
+        </div>
+        <div><a href="{{ displayedItem.acf.gaffer_link }}" target="_blank">{{ displayedItem.acf.gaffer_name }}</a></div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+</section>

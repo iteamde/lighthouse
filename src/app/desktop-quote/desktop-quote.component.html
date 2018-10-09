@@ -1,0 +1,27 @@
+<section *ngIf="quoteService.showQuote"  class="desktop-quote">
+
+  <div class="full-quote" #desktopQuote [style.bottom.px]="bottomQuoteStyle()" [ngClass]="{ 'quote-open soft-shadow': menuService.quoteOpened, 'quote-closed': !menuService.quoteOpened, 'scrolling-down': (menuService.scrollingDown && quoteLargerThanWindow && menuService.quoteOpened) }">
+
+    <div class="desktop-cart-button" (click)="toggleQuote()">
+      <mat-icon *ngIf="!menuService.quoteOpened" style="padding-right: 10px;">
+        keyboard_arrow_down
+      </mat-icon>
+      <mat-icon *ngIf="menuService.quoteOpened && quoteService.permanentlyOpen == false" style="padding-right: 10px;">
+        keyboard_arrow_up
+      </mat-icon>
+      <div class="cart-desktop" *ngIf="projectService.cartQuantity">
+        ${{ projectService.cartDailyCost }}<span class="grey">/day</span>
+      </div>
+
+      <mat-icon matBadge="{{ projectService.cartQuantity }}" matBadgeColor="accent" *ngIf='projectService.cartQuantity > 0; else loadedcart'
+      class="small-pad-right" [ngClass]="{'hand-cursor': breakpoint == 'small'}">shopping_cart</mat-icon>
+
+      <ng-template #loadedcart>
+        <mat-icon class="small-pad-right"  [ngClass]="{'hand-cursor': breakpoint == 'small'}">shopping_cart</mat-icon>
+      </ng-template>
+
+    </div>
+
+    <app-quote type='desktop'></app-quote>
+  </div>
+</section>

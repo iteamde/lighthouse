@@ -1,0 +1,31 @@
+<a [routerLink]="['/product/'+ product.slug]" (click)="setCurrentProduct(product.id)">
+<!-- PRODUCT IMAGE -->
+<div *ngIf="product.image_info"  
+    [style.background-image]="'url(' + product.image_info.url + ')' | safe: 'style'" 
+    class="tile-image">   
+    <div class="quantity-block" *ngIf="q >= 1">{{ q }}</div>     
+</div>
+
+<!-- NO IMAGE UPLOADED -->
+<div *ngIf="!product.image_info" class="tile-image">
+    <span style="float: left; padding: 20px;
+    color: white;"><mat-icon>image</mat-icon></span>
+    <div class="quantity-block" [@fastFade] *ngIf="q >= 1">{{ q }}</div>
+</div>
+</a>
+
+<!-- PRODUCT INFO -->
+<div class="tile-info-wrapper">
+   <span><a [routerLink]="['/product/'+ product.slug]" (click)="setCurrentProduct(product.id)" class="tile-name">
+        {{ product.name }}
+    </a></span>
+    <div class="tile-info">
+        <span class="tile-price">${{ product.price | number: '1.0-2' }}/day</span>
+        
+        <span class="add-remove-buttons no-select">
+        <mat-icon *ngIf="q >= 1" (click)="removeFromCart()">remove</mat-icon>
+        <mat-icon (click)="addToCart()">add</mat-icon>
+    </span>
+    </div>
+    
+</div>

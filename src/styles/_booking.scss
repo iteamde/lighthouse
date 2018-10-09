@@ -1,0 +1,246 @@
+/**
+  * @stylesheet booking.scss Account Stylesheet
+  *
+  * @description
+  * Booking process Stylesheets
+  */
+
+  @import 'variables';
+  
+
+.booking-review {
+    position: absolute;
+    width: 70%;
+    h5 {
+        margin-bottom: 0;
+    }
+    h6 {
+      margin-bottom: 0.5em;
+      text-transform: uppercase;
+      margin-top: 1.7em;
+    }
+    .project-cart h6 {
+      margin-top: 0;
+  }
+  .block {
+      margin: 3em 0;
+  }
+}
+
+.notes .mat-form-field-infix {
+    height: 100px;
+    margin-top: 30px;
+}
+
+.booking .shoot-dates .mat-input-element {
+    font-size: 1em;
+}
+
+.shoot-margin {
+    margin-top: 0.3em;
+}
+
+.social-login-btn {
+    border: 1px solid $border-grey !important;
+    color: $dark-grey;
+    img {
+        width: 20px;
+        padding-right: 10px;
+    }
+}
+
+/* BOOKING STEPPER  */
+
+.mat-stepper-horizontal-line {
+    border-top-width: 0px !important; 
+}
+.mat-drawer-container {
+   background-color: unset !important;
+}
+
+.mat-horizontal-content-container {
+    padding: 0 !important;
+ 
+}
+
+
+
+.option-info {
+    display: flex;
+    flex-direction: column;
+    h5 {
+        margin-top: 0;
+    }
+}
+
+// STEPPER DOTS
+
+
+
+.mat-horizontal-stepper-header {
+    height: 10px !important;
+    width: 10px !important;
+    padding: 0 !important;
+}
+
+.mat-horizontal-stepper-header-container {
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mat-step-icon, .mat-step-icon-not-touched {
+    width: 10px !important;
+    height: 10px !important;
+    span { 
+    display: none !important;
+    }
+    mat-icon {
+        display: none !important;
+    }
+}
+
+@include lg {
+    .mat-horizontal-stepper-header {
+        height: unset !important;
+        width: unset !important;
+        padding: unset !important;
+    }
+    
+    .mat-horizontal-stepper-header-container {
+        width: unset;
+        margin-left: unset;
+        margin-right: unset;
+    }
+
+    .mat-step-label {
+        font-family: 'Poppins'
+    }
+
+    .mat-step-icon, .mat-step-icon-not-touched {
+        background-color: none !important;
+        width: 20px !important;
+        height: 20px !important;
+        span { 
+        display: unset !important;
+
+        }
+        mat-icon {
+            display: unset !important;
+        }
+    }
+}
+
+
+
+.radio-option {
+    display: flex;
+    margin-bottom: 30px;
+    h3 {
+        margin: 0;
+    }
+    h6 {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        margin-top: 1.3em !important;
+    }
+    p {
+        margin: 0.5em 0;
+    }
+
+    .mat-radio-button {
+        margin-top: 5px;
+    }
+    .radio-option-details {
+        margin-left: 20px;
+        width: 100%;
+    }
+}
+
+#return { padding-top: 1em; }
+
+.options-title {
+    display: flex;
+    justify-content: space-between;
+    h5 {
+        display: inline-block;
+        margin-bottom: 0.2em;
+    }
+}
+
+.collection-return {
+    h2 {
+        color: black;
+    }
+}
+
+.review-dates {
+    display: flex;
+}
+
+.review-dates-date {
+    flex: 1;
+}
+
+
+.billing-button {
+    width: 50%;
+    height: 40px;
+    border: 2px solid $primary;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-family: Poppins;
+    font-weight: bold;
+    color: $primary;
+
+}
+
+.billing-button:first-of-type {
+    margin-right: 20px;
+}
+
+.billing-buttons {
+    display: flex;
+    margin-bottom: 1.2em;
+    .selected {
+        background: $primary;
+        color: white;
+    }
+}
+
+.custom-billing-details {
+    width: 100%;
+    margin-left: -25px;
+    margin-top: 20px;
+}
+
+.send-booking {
+    color: #6898F8;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16) !important;
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16) !important;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16) !important;
+    height: 50px;
+    margin-top: 0.5em;
+}
+
+.quote h2 {
+    font-size: 1.4em;
+}
+
+@include lg {
+    .radio-options {
+        display: flex;
+        flex-wrap: wrap;
+        .option-info {
+            width: 50%;
+        }
+    }
+    
+
+}
+
+#project-details-image {
+    padding-left: 80px;
+    align-self: flex-end;
+}

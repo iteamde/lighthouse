@@ -1,0 +1,29 @@
+<div class="loading-progress" *ngIf="this._progressSpinner"></div>
+<section class="search-results reg-padding">
+
+  <h1 class="top-title">
+    Search results
+  </h1>
+  <h2 class="top-subtitle"><mat-icon>subdirectory_arrow_right</mat-icon><span> {{ this.searchQuery }}</span></h2>
+
+  <div 
+  class="catalogue-wrapper"
+  fxLayoutAlign="start center" 
+  *ngIf="this._progressSpinner === false" 
+  [@listStagger]="products$.length" 
+  fxLayout="row wrap" 
+  fxLayoutGap="10px">
+
+      <div 
+      *ngFor="let product of products$" 
+      fxFlex="calc(25% - 10px)" 
+      fxFlex.xs="calc(50% - 10px)" 
+      class="product-tile">
+          <product-tile [product]="product" [projectCart]="projectCart"></product-tile>
+      </div>
+  
+</div>
+
+<div class="purple-grad empty-quote" *ngIf="products$.length == 0">No results found</div>
+
+</section>

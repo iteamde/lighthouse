@@ -1,0 +1,70 @@
+<section class="home">
+
+  <div class="home-top">
+    <!-- You can now use your library component in app.component.html -->
+    <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                        (init)="slickInit($event)"
+                        (breakpoint)="breakpoint($event)">
+        <div ngxSlickItem class="slide-1 invert slide-tile">
+          <div class="slider-content">    
+            <h1>The only lighting company to put money back into the industry</h1> 
+            <p>With every dollar spent at Lighthouse Rentals, a percentage of that profit is reinvested back into the industry through training programs and sponsorships. By support Lighthouse Rentals, you are supporting independent filmmakers across Melbourne.</p>
+          </div>
+        </div>
+        <div ngxSlickItem class="slide-2 invert slide-tile">
+          <div class="slider-content">    
+            <h1>Melbourne’s Only High-End Grip Supplier</h1> 
+            <p>Dollies, Jibs, Sliders, Car Rigs… Whatever you need. We’ve got it! Lighthouse can provide you with the tools you need to make your shots look as good as they can.</p>
+            <p>Check out our grip range.</p>
+          </div>
+        </div>
+        <div ngxSlickItem class="slide-1 invert slide-tile">
+          <div class="slider-content">    
+            <h1>Not just the place you get your lights from</h1> 
+            <p>Supplying high end film equipment is one thing, but it’s not very helpful if you don’t know how to use it. That’s why we have a team of experienced gaffers working in our warehouse who will be able to answer any lighting and grip questions you might have.</p>
+          </div>        
+        </div>
+    </ngx-slick-carousel>
+  </div>
+  <div class="features">
+      <div class="feature">
+          <div class="feature-icon">
+              <div class="icon-circle">
+              <mat-icon>phone</mat-icon>
+            </div>
+          </div>
+          <div class="feature-text">
+            <h2>Central location</h2>
+            <p>Lighthouse Rentals is based for your convenience in Port Melbourne, the hub of Melbourne filmmaking.</p>
+          </div>
+        </div>
+
+        
+    <div class="feature">
+      <div class="feature-icon">
+        <div class="icon-circle">
+        <mat-icon>phone</mat-icon>
+      </div>
+    </div>
+      <div class="feature-text">
+        <h2>24/7 Pickup</h2>
+        <p>Lighthouse has established Australia’s first 24/7 pickup and drop off service.</p>
+      </div>
+    </div>
+
+
+      <div class="feature">
+          <div class="feature-icon">
+              <div class="icon-circle">
+              <mat-icon>phone</mat-icon>
+            </div>
+          </div>
+          <div class="feature-text">
+            <h2>$55 Delivery</h2>
+            <p>The Lighthouse Express service is here to help. We can delivery your gear where you need it, when you need it.</p>
+          </div>
+        </div>
+  </div>
+</section>

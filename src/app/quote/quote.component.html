@@ -1,0 +1,142 @@
+<section class="project-quote">
+   <div class="nav-close hand-cursor" *ngIf="type == 'mobile'">
+    <mat-icon (click)="toggleQuote()">close</mat-icon>
+  </div>
+
+  <h2 class="black">Quote</h2>
+  <div *ngIf="!projectService.projectItem">
+    <div class="empty-quote purple-grad">You don't have anything in your quote yet</div>
+    <button mat-stroked-button style="margin-top: 30px;" class="btn-full" color="primary" routerLink="/login" tabindex=-1 (click)="toggleQuote()">Login
+      to view projects</button>
+  </div>
+
+  <div *ngIf="uid && !projectId">
+    <span (click)="newProject()">Start a new project</span>
+  </div>
+
+  <div *ngIf="uid && projectId">
+    <span routerLink="/user/projects" (click)="toggleQuote()">See my other projects</span>
+  </div>
+
+  <!--               -->
+  <!-- Quote Section -->
+  <!--               -->
+
+  <div *ngIf="projectId" class="quote">
+
+
+    <!-- Shoot Dates -->
+    <form [formGroup]="projectDetailsGroup" #projectDetails="ngForm" fireForm path="projects/{{ projectId }}">
+
+      <h2>Shoot dates</h2>
+
+      <div class="dates-center">
+        <datepicker></datepicker>
+      </div>
+    </form>
+
+    <!-- Gear Cart -->
+
+    <div class="side-footer">
+
+      <h2>Gear</h2>
+
+      <div class="project-cart">
+        <h6 class="qty qty-head">QTY</h6>
+        <h6 class="name">NAME</h6>
+        <h6 class="price">PRICE/day</h6>
+      </div>
+
+      <section class="gear-list">
+      <div class="project-cart" *ngFor="let item of items | async">
+        <div class="project-cart-item" (domChange)="onDomChange($event)" *ngIf="item.quantity >= 1">
+          <div class="qty"><span (click)="projectService.removeFromProject(item.product)" class="plus-minus">-</span> <span
+              class="qty-number">{{ item.quantity }}</span> <span class="plus-minus" (click)="projectService.addToProject(item.product)">+</span></div>
+          <div class="name">{{ item.product.name }}</div>
+          <div class="price">${{ item.product.price * item.quantity | number: '1.0-2'}}</div>
+        </div>
+      </div>
+    </section>
+
+      <div class="single-daily-rate">
+        <h6>DAILY RATE</h6>
+        <p>${{ projectService.cartDailyCost | number: '1.2-2' }}</p>
+      </div>
+
+      <div *ngIf="dateDetails.value.billableDays > 0; else noShootDates">
+        <div class="cart-total totals">
+          <div class="daily-totals">
+            <div>
+              <h6>DAILY RATE</h6>
+              <p>${{ projectService.cartDailyCost | number: '1.2-2' }}</p>
+            </div>
+            <div style="margin: 0 25px;">x</div>
+            <div>
+              <h6>DAYS REQUIRED</h6>
+              <p>{{ dateDetails.value.billableDays }}</p>
+            </div>
+          </div>
+          <div class="main-totals">
+            <div class="item-total">
+              <h6>SUBTOTAL</h6> <span class="item-total-value">${{ projectService.cartDailyCost * dateDetails.value.billableDays
+                | number: '1.2-2' }}</span></div>
+            <div *ngIf="auth.authenticated" class="item-total">
+              <h6>DISCOUNT ({{ auth.userDetails?.membershipDiscount }}%)</h6> <span class="item-total-value">-${{ ((projectService.cartDailyCost
+                * dateDetails.value.billableDays) * (auth.userDetails?.membershipDiscount/100) ) | number: '1.2-2' }}</span></div>
+            <div *ngIf="!auth.authenticated" class="item-total" routerLink="/login" (click)="toggleQuote()">
+              <h6>LOGIN TO SEE YOUR DISCOUNT</h6>
+            </div>
+          </div>
+
+          <div class="main-totals">
+            <div class="item-total">
+              <h6>TOTAL</h6> <span class="item-total-value">${{ (projectService.cartDailyCost * dateDetails.value.billableDays)
+                - ((projectService.cartDailyCost * dateDetails.value.billableDays) * (auth.userDetails?.membershipDiscount/100)
+                ) | number: '1.2-2' }}</span></div>
+            <div class="item-total">
+              <h6>GST (10%)</h6> <span class="item-total-value">${{ ((projectService.cartDailyCost * dateDetails.value.billableDays)
+                - ((projectService.cartDailyCost * dateDetails.value.billableDays) * (auth.userDetails?.membershipDiscount/100))
+                )/10 | number: '1.2-2' }}</span></div>
+          </div>
+
+          <div class="main-totals">
+            <div class="item-total no-border">
+              <h6>GRAND TOTAL inc. GST</h6>
+              <span class="item-total-value">
+                <h2>
+                  ${{ ((projectService.cartDailyCost * dateDetails.value.billableDays) - ((projectService.cartDailyCost * dateDetails.value.billableDays)
+                  * (auth.userDetails?.membershipDiscount/100) )) + (((projectService.cartDailyCost * dateDetails.value.billableDays)
+                  - ((projectService.cartDailyCost * dateDetails.value.billableDays) * (auth.userDetails?.membershipDiscount/100))
+                  )/10) | number: '1.2-2' }}
+                </h2>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noShootDates>
+        <h5>Please choose some shoot dates for a full quote</h5>
+      </ng-template>
+    </div>
+
+
+    <!-- Discount Message -->
+
+    <div class="discount-warn past" *ngIf="!auth.authenticated">
+      <h5>If you're a student or one of our loyal customers, you could be eligible for a discount.</h5>
+      <p>Call us after you've submitted a gear request to discuss discounts. We'll automatically apply it to your account
+        before it's time to pay.</p>
+    </div>
+
+
+    <!-- Buttons -->
+
+    <button *ngIf="quoteService.showRequestButton" tabindex=-1 mat-raised-button color="primary" class="btn-full" routerLink="/booking" fragment="request_gear" (click)="toggleQuote()">Request
+      gear
+    </button>
+
+    <button tabindex=-1 mat-raised-button color="primary" class="btn-full" routerLink="/login" *ngIf="!auth.authenticated" (click)="toggleQuote()">Login
+      to save Project</button>
+
+  </div>
+</section> 

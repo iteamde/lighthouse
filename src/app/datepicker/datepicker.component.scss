@@ -1,0 +1,175 @@
+$primary: #3A90E7;
+$blue: #3A90E7;
+$white: #FFFFFF;
+$dark-white: #FAFAFA;
+$light-grey: #F1F1F1;
+$light-blue: #F0F8FC;
+$grey: #737373;
+$border-grey: #D0D0D0;
+$dark-grey: #5F5F5F;
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.vertical-center {
+    align-items: center;
+    width: 100%;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.calendar-days {
+    width: 45px;
+    height: 45px;
+    color: #737373;
+}
+
+.inactive {
+    opacity: 0.6;
+}
+
+#calendar {
+    font-family: Poppins;
+    font-weight: bold;
+
+}
+
+.today {
+    color: #918AF1;
+}
+
+.selected {
+    background: linear-gradient(to top, white 15%, #F0F7FD 15%, #F0F7FD 85%, white 85%);
+    opacity: 1;
+    color: $primary;
+}
+
+.calendar-head {
+    color: white;
+    padding: 15px 15px 0 15px;
+
+
+    .month-select {
+        font-size: 1.23em;
+        color: white;
+        padding-top: 2em;
+        align-items: center;
+        .prev, .next {
+            margin: 0 10px;
+        }
+        .date {
+            flex: 1;
+        }
+    }
+
+    .calendar-days {
+        color: #EDF0FD;
+    }
+}
+
+.to {
+    align-self: center;
+    margin: 0 15px;
+    font-size: 0.8em !important;
+}
+
+.in-the-past {
+    color: #D0D0D0;
+}
+// .selected:first-of-type {
+//     background: black !important;
+// }
+
+.dates { padding: 15px 15px; }
+
+.picker {
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.shoot-dates {
+   display: flex;
+    input {
+        background: white;
+        border: 1px solid $border-grey;
+        text-align: center;
+        padding: 10px;
+        width: 100px;
+        font-family: 'Work Sans';
+        font-weight: 500;
+    }
+
+}
+
+.date-button {
+    color: black;
+}
+
+.date-button::placeholder {
+
+}
+
+.datepicker-background {
+    background: rgba(0,0,0,0.15);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.calendar-foot {
+    display: flex;
+    height: 35px;
+    padding: 15px 15px;
+}
+
+.close {
+    position: absolute;
+    padding: 5px 30px;
+    align-self: center;
+    right: 25px;
+    color: white;
+    background: $primary;
+}
+
+.clear {
+    position: absolute;
+    align-self: center;
+    padding: 5px 30px;
+    color: $primary;
+    right: 125px;
+}
+
+.total-days {
+    color: grey;
+    margin-left: 20px;
+    align-self: center;
+}
+
+.date-start-end {
+    background: $primary !important;
+    border-radius: 50%;
+    color: white;
+}
+
+.absolute {
+    position: absolute;
+}

@@ -1,0 +1,42 @@
+<section class="contact indent-padding invert single-page-header purple-grad"> 
+  <h1 class="top-title">Contact us</h1>
+  <p>Our full time office staff are always there to help. Feel free to get in touch with any questions you may have.</p>
+  <div class="tiles">
+    <div class="contact-tile">
+      <div class="icon contact-icon">
+        <mat-icon>location_on</mat-icon>
+      </div>
+      <div class="description">
+        <h4>Location</h4>
+        <h5>7 / 345 Plummer Street<br>Port Melbourne</h5>
+      </div>
+    </div>
+
+    <div class="contact-tile">
+        <div class="icon contact-icon">
+          <mat-icon>access_time</mat-icon>
+        </div>
+        <div class="description">
+          <h4>Business hours</h4>
+          <h5>Monday to Friday<br>9am to 5pm</h5>
+        </div>
+      </div>
+
+      <div class="contact-tile">
+          <div class="icon contact-icon">
+            <mat-icon>local_phone</mat-icon>
+          </div>
+          <div class="description">
+            <h4>Contact</h4>
+            <h5><a href="tel: +61396469034">(03) 9646 9034</a><br><a href="mailto:hello@lighthouserentals.com.au">hello@lighthouserentals.com.au</a></h5>
+          </div>
+        </div>
+  </div>
+
+
+</section>
+<div class="map">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [styles]="styles">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+</div>

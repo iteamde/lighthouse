@@ -1,0 +1,68 @@
+<div class="datepicker-background" [@fastFade] (click)="togglePicker()" *ngIf="showHidePicker"></div>
+<div class="flex-container flex-center">
+  <div id="calendar" class="flex-container flex-column vertical-center"> 
+
+    <div (click)="togglePicker()">      
+      <form [formGroup]="dateForm" class="shoot-dates">
+        <input type="text" 
+        formControlName="dateStart" 
+        name="dateStart" 
+        class="date-button"
+        attr.disabled="true"
+        [value]="dateForm.value.dateStart | date:'d MMM yyyy'"
+        placeholder="Start date">
+
+        <div class="to input-labels">to</div>
+
+        <input type="text" 
+        formControlName="dateEnd" 
+        name="dateEnd" 
+        class="date-button"
+        attr.disabled="true"
+        [value]="dateForm.value.dateEnd | date:'d MMM yyyy'"
+        placeholder="End date">
+    </form>
+    </div>
+
+<div class="picker" [@fastFade] *ngIf="showHidePicker">
+    <div class="calendar-head purple-grad" >
+      <div *ngIf="nextStep == 'start'" class="absolute">Choose a start date..</div>
+      <div *ngIf="nextStep == 'end'" class="absolute">Choose an end date..</div>
+    <div class="flex-container month-select">
+      <mat-icon (click)="previousMonth()" class="prev">chevron_left</mat-icon>
+      <div class="date">{{ date.format('MMMM')}} {{ date.format('YYYY') }}</div>
+      <mat-icon (click)="nextMonth()" class="next">chevron_right</mat-icon>
+    </div>
+
+    <div class="flex-container">
+      <div class="calendar-days flex-container flex-center">S</div>
+      <div class="calendar-days flex-container flex-center">M</div>
+      <div class="calendar-days flex-container flex-center">T</div>
+      <div class="calendar-days flex-container flex-center">W</div>
+      <div class="calendar-days flex-container flex-center">T</div>
+      <div class="calendar-days flex-container flex-center">F</div>
+      <div class="calendar-days flex-container flex-center">S</div>
+    </div>
+  </div>
+    <div class="flex-container dates flex-wrap">
+        <div *ngFor="let day of daysArr">
+          <div class="calendar-days flex-center flex-container" 
+          (click)="selectedDate(day)" 
+          [ngClass]="{
+            'inactive': !day, 
+            'in-the-past': pastCheck(day), 
+            'today': todayCheck(day), 
+            'selected': isSelected(day), 
+            'date-start-end': startOrEnd(day)
+            }">{{ day?.date() }}</div>
+        </div>
+      </div>
+      <div class="calendar-foot">
+        <span class="total-days" *ngIf='dateForm.value.billableDays'>{{ dateForm.value.billableDays }} days</span>
+        <div class="clear" (click)="clear()">Clear</div>
+        <div class="close" (click)="togglePicker()">Done</div>
+        </div>
+  </div>
+</div>
+</div>
+

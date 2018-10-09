@@ -1,0 +1,18 @@
+<div class="desktop-nav" [@listStagger]="menu$.length" [ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile'}">
+  <ul *ngFor="let item of menu$" [ngClass]="{'blue': secondaryMenuTitle == item.name}" (click)="secondaryMenu(item)">{{ item.name }}</ul>
+</div>
+
+<div class="menu-wrapper">
+<div class="desktop-nav secondary" 
+[@listStagger]="menu$[secondaryMenuOrder].sub.length" 
+[ngClass]="{'invert': this.menuService.invert && this.breakpointService.breakpoint == 'mobile'}" 
+*ngIf="secondaryMenuTitle != 'home'">
+  <mat-icon class="sub-arrow" (click)="secondaryMenu('home')">subdirectory_arrow_right</mat-icon>
+
+  <ul *ngFor="let item of menu$[secondaryMenuOrder].sub">
+      <a (click)="toggleMenu()" routerLink="catalogue/{{ secondaryMenuLink }}/{{ item.link }}">{{ item.name }}</a></ul>
+
+</div>
+
+</div>
+

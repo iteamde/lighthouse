@@ -1,0 +1,165 @@
+/**
+  * @stylesheet projects.scss Project Stylesheet
+  *
+  * @description
+  * Projects and Quotes stylesheets
+  */
+
+  @import 'variables';
+  
+.project-cart {
+    min-width: 230px;
+    display: flex;
+    h6 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    .name {
+        flex: 1;
+    }
+    .qty {
+        width: 60px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 10px;
+        align-items: center;
+    }
+}
+
+.project-cart-item {
+    display: inherit;
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.quote-dates {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quote-date-picker {
+    max-width: 100px;
+}
+
+.projects .mat-card {
+    margin-bottom: 15px;
+    background: #FBFBFB;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.12) !important;
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.12) !important;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.12) !important;
+    h4 { margin: 0 }
+    h6 { margin: 0.7em 0 }
+}
+
+.empty-quote {
+    height: 145px;
+    font-size: 1.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.qty-number {
+    padding: 0 10px;
+}
+
+.plus-minus {
+    background-color: #DCECFB;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: $primary;
+    height: 12px;
+    .plus-minus:hover {
+        transform: scale(1.2)
+    }
+}
+
+.project {
+    p {
+        margin: 0;
+        font-weight: bold;
+        line-height: 1.8em;
+    }
+
+    .name {
+        font-size: 18px;
+        font-family: 'Poppins';
+        font-weight: bold;
+    }
+
+    margin-bottom: 22px;
+    color: $white;
+    border-radius: 3px;
+    padding: 10px 16px;
+
+}
+
+
+.discount-warn {
+    padding: 10px;
+    margin: 30px 0px 20px;
+    color: white;
+    h5 {
+        margin-top: 0;
+        color: white;
+    }
+}
+
+.draft-project, .upcoming-project, .past-project {
+    h4, h5, h6 {
+        color: black;
+    }
+
+    h5, h6 {
+        font-family: 'Work Sans';
+    }
+
+    h5 { font-weight: 500; font-size: 1em; }
+
+    h6 { font-weight: 400 }
+
+    .dot {
+        position: absolute;
+        width: 23px;
+        right: 25px;
+        bottom: 25px;
+        height: 23px;
+        border-radius: 50%;
+    }
+}
+
+.draft-project {
+    .dot {
+        background: #FFBD65;
+    }
+}
+
+.upcoming-project {
+    .dot {
+        background: #55B1EF;
+    }
+}
+
+.past-project {
+    .dot {
+        background: #B5ADEA;
+    }
+}
+
+$blue: #3A90E7;
+
+.project-extras {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: $blue;
+    font-size: 0.8em;
+    .mat-icon { font-size: 16px; padding: 0 5px 5px; height: 16px; width: 16px; }
+    a { display: flex; text-decoration: none; color: $blue; font-weight: 600; font-family: Poppins }
+}
